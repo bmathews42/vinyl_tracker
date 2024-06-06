@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Vinyl Tracker!</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .hero {
+        background: url("https://dummyimage.com/600x400/a1a1a1/fff&text=+")
+          no-repeat center center;
+        background-size: cover;
+        height: 90vh;
+        color: white;
+        text-shadow: 1px 1px 6px #00000050;
+      }
+      .content-section {
+        padding: 40px 20px;
+      }
+      .navbar-nav {
+        margin-left: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("components/navbar") %>
+    <div class="hero d-flex justify-content-center align-items-center">
+      <div class="text-center">
+        <h1>Welcome to Vinyl Tracker!</h1>
+        <p>All your vinyl information in one location</p>
+        <a href="dashboard" class="btn btn-primary btn-lg">Go</a>
+      </div>
+    </div>
+  </body>
+</html>

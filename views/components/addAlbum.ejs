@@ -1,0 +1,66 @@
+<div
+  class="modal fade"
+  id="albumModal"
+  tabindex="-1"
+  aria-labelledby="albumModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="albumModalLabel">
+          Add Album Information
+        </h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="albumForm" method="POST">
+          <div class="form-check mb-3">
+            <label class="form-check-label" for="newAlbumMethod">
+              Enter new card information
+            </label>
+          </div>
+          <div class="mb-3">
+            <label for="albumName" class="form-label"
+              >Album Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="albumName"
+              name="albumName"
+              required
+              autocomplete="off"
+            />
+            <div class="invalid-feedback">Please Enter Album Name</div>
+          </div>
+          <div class="mb-3">
+            <label for="artistName" class="form-label"
+              >Artist Name</label
+            >
+            <input
+                type="text"
+                class="form-control"
+                id="artistName"
+                name="artistName"
+                required
+                autocomplete="off"
+            />
+            <div class="invalid-feedback">Please Enter Album Name</div>
+          </div>
+          <div class="text-center">
+            <input type="hidden" id="addType" name="type" value="add" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

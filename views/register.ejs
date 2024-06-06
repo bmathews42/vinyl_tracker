@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Account</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/font/bootstrap-icons.css" />
+    <style>
+      .container {
+        max-width: 400px;
+        margin-top: 50px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .form-control {
+        margin-bottom: 10px;
+      }
+      .help-block {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("components/navbar") %>
+    <div class="container bg-light">
+      <h1 class="text-center mb-4">Register</h1>
+      <form onsubmit="return checkPassword(event);" method="post">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Jane Doe"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="jdoe@example.com"
+          />
+        </div>
+        <!-- phone -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            placeholder="+1 123 456 7890"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password1"
+            name="password1"
+            autocomplete="off"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password2" class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password2"
+            name="password2"
+            autocomplete="off"
+          />
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form>
+      <p id="message" class="help-block"></p>
+      <p class="text-secondary text-center"><%= message %></p>
+    </div>
+
+    <script>
+      function checkPassword(event) {
+        let password1 = document.getElementById("password1").value;
+        let password2 = document.getElementById("password2").value;
+        if (password1 !== password2) {
+          document.getElementById("message").textContent =
+            "Passwords do not match!";
+          event.preventDefault();
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

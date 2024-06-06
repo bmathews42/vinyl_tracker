@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinyl Dashboard</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@latest"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const success = "<%= success %>";
+        const failed = "<%= failed %>";
+        const remove = "<%= remove %>";
+        console.log("in popup section");
+        if (success) {
+          toastr.success(success);
+        }else if (failed) {
+          Swal.fire({
+            title: "Error: Adding Vinyl Failed",
+            text: failed,
+            icon: "error",
+            confirmButtonText: "Okay",
+          });
+        } else if (remove) {
+          toastr.success(success);
+        }
+
+      });
+    </script>
+    <style>
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 20px; /* Adjust the padding as needed */
+        }
+
+        .navbar-nav {
+        margin-left: auto;
+      }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Vinyl Tracker</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Dashboard</a
+                >
+              </li>
+              <% if (user) { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="container-fluid mt-5">
+        <div class="row mx-0">
+            <div class="col-12 mb-4 px-4">
+                <h3>Welcome, <%= user.name %></h3>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="col-12 mb-4 px-4 text-center">
+                <h1>My Vinyls</h1>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <% for (var i = 0; i < vinyls.length; i++) { %>
+            <div class="col-3 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="<%= vinyls[i].art_url %>" alt="Card image">
+                    <div class="card-body">
+                        <h4 class="card-title"><%= vinyls[i].artist_name %></h4>
+                        <p class="card-text"><%= vinyls[i].album_name %></p>
+                        <a href="/profile/<%= vinyls[i].id %>" class="btn btn-primary">See Profile</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <div class="btn-container">
+            <button type="button"
+            name="Add Album"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#albumModal">
+                Add Album
+            </button>
+        </div>
+
+    </div>
+    <%- include('components/addAlbum') %>
+</body>
+</html>

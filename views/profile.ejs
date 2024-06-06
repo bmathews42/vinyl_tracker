@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinyl Dashboard</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <style>
+      .navbar-nav {
+        margin-left: auto;
+      }
+    </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/dashboard">Vinyl Tracker</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+          </li>
+          <% if (user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="container mt-5">
+      <div class="row album-details pb-2">
+          <div class="col">
+              <h1><%= locals.profileInfo.artist %></h1>
+              <h2><%= locals.profileInfo.album %></h2>
+          </div>
+          <div class="col-auto">
+            <button
+            type="button"
+            class="btn btn-danger btn-sm btn-remove"
+            data-bs-toggle="modal"
+            data-id="<%= profileInfo.id %>"
+            data-bs-target="#confirmRemoveModal"
+          >
+            Delete Album
+          </button>
+          </div>
+      </div>
+    <div class="row album-info">
+      <div class="col-md-4">
+        <img src="<%= locals.profileInfo.url %>" alt="<%= locals.profileInfo.album %> cover">
+      </div>
+      <div class="col-md-8">
+        <div class="album-songs">
+          <table class="table">
+            <tbody>
+              <% if (profileInfo.songs.songs && profileInfo.songs.songs.length > 0) { %>
+              <% for (var i = 0; i < profileInfo.songs.songs.length; i++) { %>
+                <tr>
+                  <td><%= profileInfo.songs.songs[i] %></td>
+                </tr>
+              <% }} else { %>
+                <tr>
+                  <td>No Song Information</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('components/remove') %>
+</body>
+</html>
